@@ -1,0 +1,12 @@
+{
+  "name": "swiftembed",
+  "version": "1.0.0",
+  "description": "High performance instagram widget engine",
+  "main": "api/config.js",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
