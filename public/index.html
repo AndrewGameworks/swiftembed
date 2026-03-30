@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftEmbed - Widget Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+    <style>
+        :root { --primary: #fe191c; --bg: #0a0a0a; --card: #151515; }
+        body { background: var(--bg); color: white; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header h1 { font-size: 3rem; color: var(--primary); text-shadow: 0 0 20px rgba(254, 25, 28, 0.4); margin: 0; }
+        .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .card { background: var(--card); border: 1px solid #222; border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h3 { margin-top: 0; border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; }
+        
+        /* Form Style */
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-size: 0.9rem; opacity: 0.8; }
+        input, select { width: 100%; padding: 12px; background: #202020; border: 1px solid #333; border-radius: 8px; color: white; box-sizing: border-box; }
+        input:focus { border-color: var(--primary); outline: none; }
+        
+        /* Result Box */
+        .code-box { background: #000; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; color: #00ff00; word-break: break-all; margin-top: 15px; border: 1px dashed #444; }
+        .btn-copy { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 15px; transition: 0.3s; }
+        .btn-copy:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(254, 25, 28, 0.4); }
+
+        @media (max-width: 768px) { .main-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>SwiftEmbed ⚡</h1>
+        <p>Generator Widget Instagram buatan AndrewSmile</p>
+    </div>
+
+    <div class="main-grid">
+        <div class="card">
+            <h3>Konfigurasi</h3>
+            <div class="form-group">
+                <label>Instagram Username</label>
+                <input type="text" id="username" placeholder="contoh: andrewsmile" oninput="updateCode()">
+            </div>
+            <div class="form-group">
+                <label>Tema Widget</label>
+                <select id="theme" onchange="updateCode()">
+                    <option value="dark">Dark Neon (Black & Red)</option>
+                    <option value="light">Classic Light</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Teks Tombol</label>
+                <input type="text" id="btnText" placeholder="Follow Me!" oninput="updateCode()">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Salin Kode</h3>
+            <p style="font-size: 0.8rem; opacity: 0.7;">Copy dan paste kode di bawah ini sebelum tag <code>&lt;/body&gt;</code> di website Anda.</p>
+            <div class="code-box" id="codeResult">
+                &lt;script src="https://swiftembed.vercel.app/sdk/v1.js" data-id="andrewsmile" async&gt;&lt;/script&gt;
+            </div>
+            <button class="btn-copy" onclick="copyCode()">COPY EMBED CODE</button>
+        </div>
+    </div>
+</div>
+
+<script id="previewScript" src="/sdk/v1.js" data-id="andrewsmile" async></script>
+
+<script>
+    function updateCode() {
+        const user = document.getElementById('username').value || 'andrewsmile';
+        const code = `<script src="https://swiftembed.vercel.app/sdk/v1.js" data-id="${user}" async><\/script>`;
+        document.getElementById('codeResult').innerText = code;
+        
+        // Logika untuk refresh preview bisa ditambahkan di sini nanti
+    }
+
+    function copyCode() {
+        const code = document.getElementById('codeResult').innerText;
+        navigator.clipboard.writeText(code);
+        alert("Kode berhasil disalin! Silakan pasang di web abang.");
+    }
+</script>
+
+</body>
+</html>
